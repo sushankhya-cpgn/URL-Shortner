@@ -1,8 +1,16 @@
+import mongoose, { Document,Types } from "mongoose";
+import user from "./user";
 
-import { timeStamp } from "console";
-import mongoose from "mongoose";
+export interface IURL{
+    shortID: string,
+    redirectURL: string,
+    visitHistory: {timeStamp:number}[],
+    creator: Types.ObjectId
+}
 
-const urlSchema = new mongoose.Schema({
+export interface IURLDocument extends IURL,Document{}
+
+const urlSchema = new mongoose.Schema<IURLDocument>({
     shortID:{
         type:String,
         required:true,
@@ -12,7 +20,12 @@ const urlSchema = new mongoose.Schema({
         type:String,
         required:true,
     },
-    visitHistory: [{timeStamp:{type: Number,default:Date.now()}}]
+    visitHistory: [{timeStamp:{type: Number}}],
+    creator:{
+        ref:"user",
+        type:mongoose.Schema.Types.ObjectId,
+        required:true
+    }
 },{timestamps:true});
 
 const UrlObject = mongoose.model('URLOBJECT',urlSchema);

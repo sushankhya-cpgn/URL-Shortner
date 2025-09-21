@@ -1,7 +1,5 @@
 import express from "express";
-import { nanoid } from "nanoid";
-import UrlObject from "../models/url.js";
-import { generateShortID, getURL } from "../controllers/url.js";
+import { generateShortID, getClicks, getURL } from "../controllers/url.js";
 
 const router = express.Router();
 
@@ -9,5 +7,7 @@ const router = express.Router();
 router.post("/", generateShortID);
 
 router.get("/:url",getURL);
+
+router.get("/analytics/:url",getClicks);
 
 export default router;
