@@ -22,7 +22,7 @@ export async function login(req:Request,res:Response){
         }
 
     
-    const tokenPayload = {username:user_info.username,email:user_info.email}
+    const tokenPayload = {id:user_info._id,username:user_info.username,email:user_info.email}
         
     const jwt = jsonwebtoken.sign(tokenPayload,process.env.JWT_SECRET as string,{
         expiresIn:'1h'

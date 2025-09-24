@@ -5,7 +5,9 @@ export interface IURL{
     shortID: string,
     redirectURL: string,
     visitHistory: {timeStamp:number}[],
-    creator: Types.ObjectId
+    creator: Types.ObjectId,
+    createdAt?:string,
+    updatedAt?:string
 }
 
 export interface IURLDocument extends IURL,Document{}
@@ -22,7 +24,7 @@ const urlSchema = new mongoose.Schema<IURLDocument>({
     },
     visitHistory: [{timeStamp:{type: Number}}],
     creator:{
-        ref:"user",
+        ref:"User",
         type:mongoose.Schema.Types.ObjectId,
         required:true
     }
